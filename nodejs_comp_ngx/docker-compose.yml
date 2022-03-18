@@ -1,0 +1,25 @@
+version: '2.1' 
+services:
+  nginx:
+    image: nginx
+    volumes:
+     - ./templates:/etc/nginx/templates
+    ports:
+     - "80:80"
+    environment:
+     - NGINX_HOST=foobar.com
+     - NGINX_PORT=80
+  nodejs_80: 
+    image: nodejs80/node80 
+    build: ./test_80
+    container_name: nodejs_80 
+    ports:
+     - 8080:8080
+    restart: on-failure
+  nodejs_81: 
+    image: nodejs81/node81 
+    build: ./test_81
+    container_name: nodejs_81
+    ports:
+    - 8081:8081 
+    restart: on-failure
